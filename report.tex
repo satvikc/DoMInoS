@@ -11,26 +11,29 @@
 
 \newcommand{\comment}[1]{}
 
-
-\title{CS685: Group 05 \\
+\title{CS685: Group 5 \\
 DoMInoS - Discovery of Meta-Information of Songs}
 \author{
 \begin{tabular}{ccc}
-	Satvik Chauhan & Shubham Tulsiani  & Shyam Upadhyay \\
-	\url{satvikc@iitk.ac.in} & \url{shubhtul@iitk.ac.in} & \url{shyamupa@iitk.ac.in} \\
+	Satvik Chauhan & Shubham Tulsiani & Shyam Upadhyay \\
+	\url{satvikc@iitk.ac.in} & \url{shubhtuls@iitk.ac.in} & \url{shyamupa@iitk.ac.in} \\
 	Dept. of CSE & Dept. of CSE & Dept. of CSE \\
 	\multicolumn{3}{c}{Indian Institute of Technology, Kanpur}
 \end{tabular}
 }
 \date{Mid-sem report \\	% replace by ``initial'' or ``final'' as appropriate
 \today}	% replace by actual date of submission or \today
+
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
 	%
-	Abstract of the project.
+Identifying the meta-information (genre/artist/decade) of a song by listening to it is a challenging task 	which humans are quite adept at. A basic hypothesis that we adhere to when we judge a song to be 'retro' or 'modern' is that the something in the songs has changed over decades.
+
+In this project, we explore the Million Song Dataset and use the mined features to train models to identify the decade of a song from these features.
+Based on the importance of various features in the classsification, we narrow down what exactly has changed in songs over decades and answer questions like "Have the songs evolved over decades to have more beats/ become louder ?"
 	%
 \end{abstract}
 
@@ -46,7 +49,6 @@ feature vector in classification by standard machine learning algorithms. But
 finding good feature set for a particular classification problem is a non-trivial
 task \cite {ada2006} \cite{feature2005}.
 
-
 \subsection{Problem Statement}
 
 State the problem as clearly and as formally as possible.
@@ -55,8 +57,11 @@ Explain the objectives, and all the inputs.
 
 \subsection{Related Work}
 
-Fill in all relevant past work.
+Any form of music information retrieval system depends on the feature vectors that have been extracted from the dataset. Analysis of frequency component of the songs and metadata are used to train models. These models can then identify the acoustic fingerprint of various artists which can be coupled with the learned metadata to make inferences about the song.
 
+Historically, music information retrieval is related to the field of speech recognition. Foote \cite{Foote} gave a overview of audio information retrieval using techniques from speech recognition. Logan \cite{LOGAN} suggested the use of Mel Frequency Cepstral Coefficients (MFCCs) for modeling music and demonstrated its potential for high-level music retrieval. Analysis methods like MFCC were borrowed from speech recognition, although recently new music classification techniques based on modelling acoustic features of the songs have been proposed.\\
+Music genre classification was studied in \cite{GTAN} where the authors used 3 feature sets to attain a classification accuracy of 61\% for ten musical genres. They used a small dataset of 100 representatives from each genre.Their audio retrieval system, MARSYAS, operated on representations of audio to predict genre.\\
+The first attempt at artist classification problem was made by \cite{BGS}. Whitman et.al.\cite{BGS} developed a Minnow-match, a machine listening and music retrieval engine which uses music metadata to classify music using SVM and neural networks. They obtained 91\% accuracy with 32 songs from a pool of 5 artists and 70\% accuracy with 50 songs from a pool of 10 artists. They made use of SVM for pre-classification to alleviate the scaling problems with neural networks.
 \comment{
 
 Can also comment out paragraphs, etc.
@@ -116,6 +121,7 @@ Clearly state the conclusions.
 
 Also, outline the future work.
 
+\section*{References}
 \begin{thebibliography}{99}
 \bibitem{mgc2011} Yoko Anan, Kohei Hatano, Hideo Bannai and Masayuki
   Takeda. Music Genre Classification Using Similarity Functions. In
@@ -129,6 +135,28 @@ classiﬁcation. \emph{Machine Learning},
   extractors and psycho-acoustic transformations for music genre
   classiﬁcation. In \emph{Proceedings of the 6th International Conference on Music Information Retrieval}
 (ISMIR'05), pages 34–41, 2005.
+\bibitem{GTAN}
+	G. Tzanetakis and P. Cook
+	\emph{Musical Genre Classification of Audio Signals}.
+	IEEE Transactions on Speech and Audio Processing,
+	2002.
+
+\bibitem{BGS}
+	B. Whitman, G. Flake, and S. Lawrence
+	\emph{Artist Detection in music with Minnow-match}.
+	IEEE Workshop on Neural Networks for Signal Processing,
+	2001.
+\bibitem{Foote}
+	Foote, Jonathan
+	\emph{An Overview of Audio Information Retrieval}
+	ACM-Springer Multimedia Systems,
+	1998
+\bibitem{LOGAN}
+	Logan, Beth
+	\emph{Mel Frequency Cepstral Coefficients for Music Modeling}
+	Proceedings of ISMIR,
+	2000
+
 \end{thebibliography}
 
 \end{document}
