@@ -11,19 +11,19 @@
 
 \newcommand{\comment}[1]{}
 
-
-\title{CS685: Group 05 \\
+\title{CS685: Group 5 \\
 DoMInoS - Discovery of Meta-Information of Songs}
 \author{
 \begin{tabular}{ccc}
-	Satvik Chauhan & Shubham Tulsiani  & Shyam Upadhyay \\
-	\url{satvikc@iitk.ac.in} & \url{shubhtul@iitk.ac.in} & \url{shyamupa@iitk.ac.in} \\
+	Satvik Chauhan & Shubham Tulsiani & Shyam Upadhyay \\
+	\url{satvikc@iitk.ac.in} & \url{shubhtuls@iitk.ac.in} & \url{shyamupa@iitk.ac.in} \\
 	Dept. of CSE & Dept. of CSE & Dept. of CSE \\
 	\multicolumn{3}{c}{Indian Institute of Technology, Kanpur}
 \end{tabular}
 }
 \date{Mid-sem report \\	% replace by ``initial'' or ``final'' as appropriate
 \today}	% replace by actual date of submission or \today
+
 \begin{document}
 
 \maketitle
@@ -36,8 +36,33 @@ DoMInoS - Discovery of Meta-Information of Songs}
 
 \section{Introduction}
 
-Automatically classifying songs into categories based on year, mood, artist or
-genre is widely studied topic in the field of Music Information Retrieval (MIR)
+Why is this important and interesting?
+
+Please explain the backgroundas well.
+
+Two example paragraphs follow.
+
+In online social networks such as Facebook (\url{www.facebook.com}), Youtube
+(\url{www.youtube.com}), Twitter (\url{www.twitter.com}), etc., people share
+different content such as messages, videos, songs, opinions, blogs, etc.  In
+another important form of networks---peer-to-peer networks---files are shared.
+In both these cases, reputation of a peer matters; otherwise a user may get
+exposed to objectionable content such as a virus.  Thus, the trust that other
+users impart on a node is an important attribute of it.  Slashdot
+(\url{www.slashdot.org}) and Epinions (\url{www.epinions.com}) are networks
+where explicit opinions of a user as trust and distrust are available.
+
+A network based on trust is quite different from other networks. An explicit
+link in a network such as Facebook, Youtube signifies that two nodes are close.
+However, in a trust based network, two nodes may be close and may be connected
+but the link may show distrust.  More importantly, a neutral opinion in a trust
+based network is quite different from a no-connection.  Consider a simple
+example where node $A$ has $1000$ neutral opinions and $10$ negative opinions
+about it and another node $B$ has only $10$ negative opinions about it.  It is
+intuitive that node $A$ has a higher reputation.  However, if the neutral
+opinion is modeled by the absence of an edge, the two nodes behave the same.
+This indicates that neutral opinion is not the same as a no-connection.  In
+other words, an edge with $0$ weight is different from an edge that is absent.
 
 \subsection{Problem Statement}
 
@@ -47,8 +72,11 @@ Explain the objectives, and all the inputs.
 
 \subsection{Related Work}
 
-Fill in all relevant past work.
+Any form of music information retrieval system depends on the feature vectors that have been extracted from the dataset. Analysis of frequency component of the songs and metadata are used to train models. These models can then identify the acoustic fingerprint of various artists which can be coupled with the learned metadata to make inferences about the song.  
 
+Historically, music information retrieval is related to the field of speech recognition. Foote \cite{Foote} gave a overview of audio information retrieval using techniques from speech recognition. Logan \cite{LOGAN} suggested the use of Mel Frequency Cepstral Coefficients (MFCCs) for modeling music and demonstrated its potential for high-level music retrieval. Analysis methods like MFCC were borrowed from speech recognition, although recently new music classification techniques based on modelling acoustic features of the songs have been proposed.\\
+Music genre classification was studied in \cite{GTAN} where the authors used 3 feature sets to attain a classification accuracy of 61\% for ten musical genres. They used a small dataset of 100 representatives from each genre.Their audio retrieval system, MARSYAS, operated on representations of audio to predict genre.\\
+The first attempt at artist classification problem was made by \cite{BGS}. Whitman et.al.\cite{BGS} developed a Minnow-match, a machine listening and music retrieval engine which uses music metadata to classify music using SVM and neural networks. They obtained 91\% accuracy with 32 songs from a pool of 5 artists and 70\% accuracy with 50 songs from a pool of 10 artists. They made use of SVM for pre-classification to alleviate the scaling problems with neural networks.
 \comment{
 
 Can also comment out paragraphs, etc.
@@ -110,8 +138,30 @@ Also, outline the future work.
 
 \section*{References}
 
-Directly type in bib entries.
+\begin{thebibliography}{9}
 
-Better is to use bibtex.
+\bibitem{GTAN}
+	G. Tzanetakis and P. Cook
+	\emph{Musical Genre Classification of Audio Signals}.
+	IEEE Transactions on Speech and Audio Processing,
+	2002.
+
+\bibitem{BGS}
+	B. Whitman, G. Flake, and S. Lawrence
+	\emph{Artist Detection in music with Minnow-match}.
+	IEEE Workshop on Neural Networks for Signal Processing,
+	2001.
+\bibitem{Foote}
+	Foote, Jonathan
+	\emph{An Overview of Audio Information Retrieval}
+	ACM-Springer Multimedia Systems,
+	1998
+\bibitem{LOGAN}
+	Logan, Beth
+	\emph{Mel Frequency Cepstral Coefficients for Music Modeling}
+	Proceedings of ISMIR,
+	2000
+
+\end{thebibliography}
 
 \end{document}
