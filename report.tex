@@ -37,7 +37,15 @@ DoMInoS - Discovery of Meta-Information of Songs}
 \section{Introduction}
 
 Automatically classifying songs into categories based on year, mood, artist or
-genre is widely studied topic in the field of Music Information Retrieval (MIR)
+genre is widely studied topic in the field of Music Information Retrieval
+(MIR). A lot of research is already done \cite{mgc2011} \cite{ada2006} for
+this task, as creating accurate music classifiers are useful in fields
+like music search, recommendation systems etc. The categorization usually
+involves extracting important features from songs and using the extracted
+feature vector in classification by standard machine learning algorithms. But
+finding good feature set for a particular classification problem is a non-trivial
+task \cite {ada2006} \cite{feature2005}.
+
 
 \subsection{Problem Statement}
 
@@ -108,10 +116,19 @@ Clearly state the conclusions.
 
 Also, outline the future work.
 
-\section*{References}
-
-Directly type in bib entries.
-
-Better is to use bibtex.
+\begin{thebibliography}{99}
+\bibitem{mgc2011} Yoko Anan, Kohei Hatano, Hideo Bannai and Masayuki
+  Takeda. Music Genre Classification Using Similarity Functions. In
+  \emph{Proceedings of the 12th International Conference on Music Information Retrieval}
+(ISMIR'11).
+\bibitem{ada2006} James Bergstra, Norman Casagrande, Dumitru Erhan,
+Douglas Eck, and Balazs Kegl. Aggregate features and AdaBoost for music
+classiﬁcation. \emph{Machine Learning},
+65:473–484, 2006.
+\bibitem{feature2005} Thomas Lidy and Andreas Rauber. Evaluation of feature
+  extractors and psycho-acoustic transformations for music genre
+  classiﬁcation. In \emph{Proceedings of the 6th International Conference on Music Information Retrieval}
+(ISMIR'05), pages 34–41, 2005.
+\end{thebibliography}
 
 \end{document}
