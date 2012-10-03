@@ -43,11 +43,14 @@ Automatically classifying songs into categories based on year, mood, artist or
 genre is widely studied topic in the field of Music Information Retrieval
 (MIR). A lot of research is already done \cite{mgc2011} \cite{ada2006} for
 this task, as creating accurate music classifiers are useful in fields
-like music search, recommendation systems etc. The categorization usually
-involves extracting important features from songs and using the extracted
-feature vector in classification by standard machine learning algorithms. But
-finding good feature set for a particular classification problem is a non-trivial
-task \cite {ada2006} \cite{feature2005}.
+like music search, recommendation systems etc. Listeners often have particular
+liking for music from certain periods of their lives, thus the
+predicted decade could be a useful basis for recommendation.
+Furthermore, a successful model of the variation in music
+characteristics over the past century could provide useful insight on
+the long-term evolution of popular music. The decade prediction can be
+associated with genre prediction as many music genres are mostly associated
+with particular years, so this problem is clearly related to genre recognition.
 
 We are using the \emph{Million songs database} \cite{millionsongs}, which is a freely available collection of
 audio features and metadata for a million contemporary popular music tracks.
@@ -56,6 +59,15 @@ were legally available to The Echo Nest. The songs are are supposed to be
 representative of western commercial music dated as back as 1922.
 
 \subsection{Problem Statement}
+
+We define the problem of decade prediction as estimating the decade in which
+the song was released. The million songs dataset contains 515, 576 tracks
+representing 28,233 artists for which the year information is present in the
+metadata. However the spread of data across various decades is very non
+uniform. The features available for each song are \emph{pitches}, \emph{timbre} and
+\emph{loudness}.
+It is suggested to split the dataset into training and testing set on the basis or artists to
+avoid the \emph{producer effect}.
 
 
 State the problem as clearly and as formally as possible.
