@@ -1,5 +1,6 @@
 %% KNN classification 
-k=10;
+as
+for k = [150,200,500]
 % loading training data 
 
 training_data = [];
@@ -23,8 +24,12 @@ end
 % KNN classification
 
 disp('Beginning KNN classification');
-classes = knnclassify(test_data,training_data,training_classes,10);
+classes = knnclassify(test_data,training_data,training_classes,k);
 
 diff = classes - test_classes;
 count = sum(diff(:)==0);
-accuracy = count * 100 / length(classes)
+accuracy = count * 100 / length(classes);
+
+save(['knnoutput_',num2str(k),'.mat'],'classes','accuracy');
+
+end
