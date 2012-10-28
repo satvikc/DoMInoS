@@ -30,10 +30,10 @@ DoMInoS - Discovery of Meta-Information of Songs}
 
 \begin{abstract}
 	%
-Identifying the meta-information (genre/artist/decade) of a song by listening to it is a challenging task 	which humans are quite adept at. A basic hypothesis that we adhere to when we judge a song to be 'retro' or 'modern' is that the something in the songs has changed over decades.
+Identifying the meta-information (genre/artist/decade) of a song by listening to it is a challenging task which humans are quite adept at. A basic hypothesis that we adhere to when we judge a song to be 'retro' or 'modern' is that \emph{something} in the songs has changed over decades.
 
-In this project, we explore the Million Song Dataset and use the mined features to train models to identify the decade of a song from these features.
-Based on the importance of various features in the classsification, we narrow down what exactly has changed in songs over decades and answer questions like "Have the songs evolved over decades to have more beats/ become louder ?"
+In this project, we explore the Million Song Dataset \cite{millionsongs} and use the mined features to train models to identify the decade of a song from these features.
+Based on the importance of various features in the classification, we narrow down what exactly has changed in songs over decades and answer questions like "Have the songs evolved over decades to have more beats/become louder?","Is a particular genre characteristic of a certain decade?"
 	%
 \end{abstract}
 
@@ -41,8 +41,7 @@ Based on the importance of various features in the classsification, we narrow do
 
 Automatically classifying songs into categories based on year, mood, artist or
 genre is widely studied topic in the field of Music Information Retrieval
-(MIR). A lot of research is already done \cite{mgc2011} \cite{ada2006} for
-this task, as creating accurate music classifiers are useful in fields
+(MIR). A lot of research is already done \cite{mgc2011} \cite{ada2006} in this area, as creating accurate music classifiers are useful in fields
 like music search, recommendation systems etc. Listeners often have particular
 liking for music from certain periods of their lives, thus the
 predicted decade could be a useful basis for recommendation.
@@ -52,95 +51,45 @@ the long-term evolution of popular music. The decade prediction can be
 associated with genre prediction as many music genres are mostly associated
 with particular years, so this problem is clearly related to genre recognition.
 
-We are using the \emph{Million songs database} \cite{millionsongs}, which is a freely available collection of
-audio features and metadata for a million contemporary popular music tracks.
-The database contains metadata and audio features for million songs that
-were legally available to The Echo Nest. The songs are are supposed to be
+We are using the \emph{Million Song Dataset} \cite{millionsongs}, which is a freely available collection of audio features and metadata for a million contemporary popular music tracks.
+The dataset contains metadata and audio features for million songs that
+were legally available to The Echo Nest \cite{echonest}. The songs are are supposed to be
 representative of western commercial music dated as back as 1922.
 
 \subsection{Problem Statement}
-
-We define the problem of decade prediction as estimating the decade in which
-the song was released. The million songs dataset contains 515, 576 tracks
-representing 28,233 artists for which the year information is present in the
-metadata. However the spread of data across various decades is very non
-uniform. The features available for each song are \emph{pitches}, \emph{timbre} and
-\emph{loudness}.
-It is suggested to split the dataset into training and testing set on the basis or artists to
-avoid the \emph{producer effect}.
-
-
-State the problem as clearly and as formally as possible.
-Explain the notations, etc.
-Explain the objectives, and all the inputs.
-
+Given a song, our aim is to predict the decade in which the song was released. We will use the million song dataset for training and testing our classifier. The million songs dataset contains 515,576 tracks representing 28,233 artists labelled with their release year. Each song in the dataset has 90 attributes. A challenging aspect of the dataset is the spread of data across various decades is very non-uniform. Our classifier should therefore be robust to imbalanced datasets.
+We intend to compare the performance of different classifiers against the baseline approach of k-NN.
 \subsection{Related Work}
 
 Any form of music information retrieval system depends on the feature vectors that have been extracted from the dataset. Analysis of frequency component of the songs and metadata are used to train models. These models can then identify the acoustic fingerprint of various artists which can be coupled with the learned metadata to make inferences about the song.
 
-Historically, music information retrieval is related to the field of speech recognition. Foote \cite{Foote} gave a overview of audio information retrieval using techniques from speech recognition. Logan \cite{LOGAN} suggested the use of Mel Frequency Cepstral Coefficients (MFCCs) for modeling music and demonstrated its potential for high-level music retrieval. Analysis methods like MFCC were borrowed from speech recognition, although recently new music classification techniques based on modelling acoustic features of the songs have been proposed.\\
-Music genre classification was studied in \cite{GTAN} where the authors used 3 feature sets to attain a classification accuracy of 61\% for ten musical genres. They used a small dataset of 100 representatives from each genre.Their audio retrieval system, MARSYAS, operated on representations of audio to predict genre.\\
+Historically, music information retrieval is related to the field of speech recognition. Foote \cite{Foote} gave a overview of audio information retrieval using techniques from speech recognition. Logan \cite{LOGAN} suggested the use of Mel Frequency Cepstral Coefficients (MFCCs) for modeling music and demonstrated its potential for high-level music information retrieval. Analysis methods like MFCC were borrowed from speech recognition, although recently new music classification techniques based on modelling acoustic features of the songs have been proposed.
+
+Music genre classification was studied in \cite{GTAN} where the authors used 3 feature sets to attain a classification accuracy of 61\% for ten musical genres. They used a small dataset of 100 representatives from each genre. Their audio retrieval system, MARSYAS, operated on representations of audio to predict genre.
+
 The first attempt at artist classification problem was made by \cite{BGS}. Whitman et.al.\cite{BGS} developed a Minnow-match, a machine listening and music retrieval engine which uses music metadata to classify music using SVM and neural networks. They obtained 91\% accuracy with 32 songs from a pool of 5 artists and 70\% accuracy with 50 songs from a pool of 10 artists. They made use of SVM for pre-classification to alleviate the scaling problems with neural networks.
+
+Recently, an attempt at song year prediction was made by \cite{millionsongs}, in which the authors used a regression model based on linear gradient descent and compared its performance against k-nearest neighbours.
 \comment{
 
 Can also comment out paragraphs, etc.
 
 }
 
-\section{Algorithm or Approach}
+\section{Approach}
 
-Details of the method.
+The baseline approach is to use k-NN to predict the release decade. The decade is predicted based on a majority voting of the k-nearest neighbours in the training set. In this project, we will try two approaches for decade classification. 
 
-Put in a pseudo-code, etc.
-Explain with figures.
+Firstly treating the decades as nominal categories, we will use a 1-versus-1 approach to train an ensemble of SVM classifiers for each class and take a majority vote for predicting the release decade of a song. We will compare this with the performance of 1-versus-all approach in which we train a SVM for identifying one class against the others. In case more than one SVM fires, we will choose the class indicated by the SVM with maximum confidence(margin of the classifer) amongst the ones which fired. Another approach is to treat the decades as ordinal categories. In this, we will use a decision tree where at each node we will split the search space based on the output of a SVM. 
 
-\comment{
-
-Use the following format for figures:
-
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=0.95\columnwidth]{figure_file}
-	\caption{This figure explains this.}
-	\label{fig:block}
-\end{figure}
-
-And refer as Figure \ref{fig:block}.
-
-}
-
-\section{Results}
-
-Details of results, in tabular and/or graphical formats.
-
-\comment{
-
-\begin{table}[t]
-	\centering
-	\begin{tabular}{|c||cc|}
-		\hline
-		Header 1 & Desc 1 & Desc 2 \\
-		\hline
-		\hline
-		Row 1 & Data 1-1 & Data 1-2 \\
-		Row 2 & Data 2-1 & Data 2-2 \\
-		\hline
-	\end{tabular}
-	\caption{Table of results.}
-	\label{tab:results}
-\end{table}
-
-And refer as Table \ref{tab:results}.
-
-}
+We will later use the RANSAC approach \cite{ransac} to improve performance by reducing effect of outliers on our classifier. We will train our classifier on a random subset of the training dataset and test its accuracy on a subset of the remaining training dataset. We repeat this process several times and expect that the effect of the outliers is minimized. 
+ 
 
 \section{Conclusions}
+\subsection{Future Work}
+Another challenging problem can be to predict the genre/artist of a song. The techniques we develop in this project can be used to make such predictions and this will test their robustness against such classification problems. If our techniques are robust enough, we can use them to create an effective music recommendation system. 
+%~ \section*{References}
 
-Clearly state the conclusions.
-
-Also, outline the future work.
-
-\section*{References}
 \begin{thebibliography}{99}
 \bibitem{mgc2011}
   Yoko Anan, Kohei Hatano, Hideo Bannai and Masayuki Takeda.
@@ -152,16 +101,12 @@ Also, outline the future work.
   Kegl.
   \emph{Aggregate features and AdaBoost for music classiﬁcation.}
   Machine Learning 65:473–484, 2006.
-\bibitem{feature2005}
-  Thomas Lidy and Andreas Rauber.
-  \emph{Evaluation of feature extractors and psycho-acoustic transformations for
-  music genre classiﬁcation}.
-  In Proceedings of the 6th International Conference on Music Information
-  Retrieval (ISMIR'05), pages 34–41, 2005.
+  
 \bibitem{millionsongs}
   Thierry Bertin-Mahieux, Daniel P.W. Ellis, Brian Whitman, Paul Lamere
   \emph{The Million Song Dataset}
   In Proceedings of 12th International Society for Music Information Retrieval Conference (ISMIR 2011)
+  
 \bibitem{GTAN}
 	G. Tzanetakis and P. Cook
 	\emph{Musical Genre Classification of Audio Signals}.
@@ -183,7 +128,13 @@ Also, outline the future work.
 	\emph{Mel Frequency Cepstral Coefficients for Music Modeling}
 	Proceedings of ISMIR,
 	2000
-
+\bibitem{ransac}
+	Martin A. Fischler and Robert C. Bolles
+	\emph{Random Sample Consensus: A Paradigm for Model Fitting with Applications to Image Analysis and Automated Cartography},
+	1981
+\bibitem{echonest}
+	The Echo Nest,
+	\url{developer.echonest.com}
 \end{thebibliography}
 
 \end{document}
